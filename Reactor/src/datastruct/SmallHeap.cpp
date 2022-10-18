@@ -10,24 +10,24 @@ SmallHeap::SmallHeap()
 
 }
 
-SmallHeapNode SmallHeap::TackFirst()
+SmallHeapNode SmallHeap::tackFirst()
 {
     if (nodes_.empty()) return SmallHeapNode(0);
     int index = 0;
     SmallHeapNode node = nodes_[0];
     std::swap(nodes_[0], nodes_[nodes_.size() - 1]);      
     nodes_.pop_back();    
-    DownBalance(0);
+    downBalance(0);
     return node;
 }
 
-void SmallHeap::AddNode(const SmallHeapNode &node)
+void SmallHeap::addNode(const SmallHeapNode &node)
 {
     nodes_.push_back(node);
-    UpBalance(nodes_.size() - 1);
+    upBalance(nodes_.size() - 1);
 }
 
-void SmallHeap::RemoveNode(const SmallHeapNode &node)
+void SmallHeap::removeNode(const SmallHeapNode &node)
 {
     if (nodes_.empty()) return;
     
@@ -48,18 +48,18 @@ void SmallHeap::RemoveNode(const SmallHeapNode &node)
         return;
     } while(false);
 
-    UpBalance(index);
-    DownBalance(index);
+    upBalance(index);
+    downBalance(index);
 }
 
-void SmallHeap::Traverse()
+void SmallHeap::traverse()
 {
     for (auto ite = nodes_.begin(); ite != nodes_.end(); ++ite) {
         std::cout << ite->msencond << std::endl;
     }
 }
 
-void SmallHeap::UpBalance(int index)
+void SmallHeap::upBalance(int index)
 {
     if (index <= 0) {
         return;
@@ -70,10 +70,10 @@ void SmallHeap::UpBalance(int index)
         std::swap(nodes_[index], nodes_[parentIndex]);
     }
 
-    UpBalance(parentIndex);
+    upBalance(parentIndex);
 }
 
-void SmallHeap::DownBalance(int index) 
+void SmallHeap::downBalance(int index) 
 {
     if (LEFT_CHILD_INDEX(index) + 1 > nodes_.size()) {
         return;
@@ -101,5 +101,5 @@ void SmallHeap::DownBalance(int index)
         }
     }
 
-    DownBalance(nextIndex);
+    downBalance(nextIndex);
 }

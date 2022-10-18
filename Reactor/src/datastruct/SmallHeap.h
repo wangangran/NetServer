@@ -1,5 +1,5 @@
-#ifndef _SMALLHEAP_H_
-#define _SMALLHEAP_H_
+#ifndef NETSERVER_REACTOR_DATASTRUCT_SMALLHEAP_H
+#define NETSERVER_REACTOR_DATASTRUCT_SMALLHEAP_H
 
 #include <vector>
 #include <functional>
@@ -20,15 +20,15 @@ class SmallHeap {
 public:
     explicit SmallHeap();
 
-    SmallHeapNode TackFirst();
-    void AddNode(const SmallHeapNode &node);
-    void RemoveNode(const SmallHeapNode &node);
-    void Traverse();
+    SmallHeapNode tackFirst();
+    void addNode(const SmallHeapNode &node);
+    void removeNode(const SmallHeapNode &node);
+    void traverse();
 private:
-    void UpBalance(int index);
-    void DownBalance(int index);
+    void upBalance(int index);
+    void downBalance(int index);
 private:
     std::vector<SmallHeapNode> nodes_;   
 };
 
-#endif
+#endif // NETSERVER_REACTOR_DATASTRUCT_SMALLHEAP_H
