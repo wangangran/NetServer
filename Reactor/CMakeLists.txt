@@ -27,6 +27,7 @@ include_directories("${PROJECT_SOURCE_DIR}/src")
 
 add_subdirectory("${PROJECT_SOURCE_DIR}/src/base")
 add_subdirectory("${PROJECT_SOURCE_DIR}/src/net")
+add_subdirectory("${PROJECT_SOURCE_DIR}/src/common/hookMalloc")
 
 
 #example

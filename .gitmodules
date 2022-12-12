@@ -1,0 +1,3 @@
+[submodule "Reactor/src/thirdLib/jemalloc"]
+	path = Reactor/src/thirdLib/jemalloc
+	url = https://github.com/jemalloc/jemalloc.git
