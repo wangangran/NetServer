@@ -3,7 +3,7 @@
 #include <dlfcn.h>
 #include <stdlib.h>
 #include <sys/mman.h>
-#include "jemalloc.h"
+#include <jemalloc/jemalloc.h>
 
 extern void* __libc_calloc(size_t, size_t);
 
