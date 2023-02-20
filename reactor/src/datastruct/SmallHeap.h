@@ -3,32 +3,121 @@
 
 #include <vector>
 #include <functional>
+#include <iostream>
+
+#define PARENT_INDEX(i)             ((i - 1) / 2)
+#define LEFT_CHILD_INDEX(i)         (2 * i + 1)
+#define RIGHT_CHILD_INDEX(i)        (2 * i + 2)
+
 
 using TimeFun = std::function<void()>;
 
-typedef struct SmallHeapNode {
-    SmallHeapNode(unsigned int msend) : msencond(msend) {}
-    unsigned int msencond;
-    TimeFun fun;
-    bool operator==(const SmallHeapNode &other) {
-        return (this->msencond == other.msencond);
+template<typename K, typename V>
+struct SmallHeapNode {
+    SmallHeapNode(K k, V v) : key(k), value(v) {}
+    K key;
+    V value;
+    bool operator==(const K &k) {
+        return (this->key == k);
     };
-} SmallHeapNode;
+};
 
 
+template<typename K, typename V>
 class SmallHeap {
 public:
-    explicit SmallHeap();
+    explicit SmallHeap() { };
 
-    SmallHeapNode tackFirst();
-    void addNode(const SmallHeapNode &node);
-    void removeNode(const SmallHeapNode &node);
-    void traverse();
+    SmallHeapNode<K, V> tackFirst() {
+        if (nodes_.empty()) return SmallHeapNode<K, V>(0, std::string());
+        int index = 0;
+        SmallHeapNode<K, V> node = nodes_[0];
+        std::swap(nodes_[0], nodes_[nodes_.size() - 1]);      
+        nodes_.pop_back();    
+        downBalance(0);
+        return node;
+    }
+
+    void addNode(const K &key, const V &value) {
+        nodes_.push_back(std::move(SmallHeapNode<K, V>(key, value)));
+        upBalance(nodes_.size() - 1);
+    }
+
+    void removeNode(const K &key) {
+        if (nodes_.empty()) return;
+        
+        int index = 0;
+        do {
+            if (nodes_[nodes_.size() -1] == key) {
+                nodes_.pop_back(); 
+                return;
+            }
+
+
+            for (index = 0; index < nodes_.size(); ++index) {
+                if (nodes_[index] == key) {
+                    std::swap(nodes_[index], nodes_[nodes_.size() - 1]);      
+                    nodes_.pop_back();    
+                    break;
+                }
+            }
+            return;
+        } while(false);
+
+        upBalance(index);
+        downBalance(index);
+    }
+    void traverse() {
+        for (auto ite = nodes_.begin(); ite != nodes_.end(); ++ite) {
+            std::cout << ite->value << std::endl;
+        }
+    }
 private:
-    void upBalance(int index);
-    void downBalance(int index);
+    void upBalance(int index) {
+        if (index <= 0 || index >= nodes_.size()) {
+            return;
+        }
+
+        int parentIndex = PARENT_INDEX(index);
+        if (nodes_[index].key < nodes_[parentIndex].key) {
+            std::swap(nodes_[index], nodes_[parentIndex]);
+        }
+
+        upBalance(parentIndex);
+    }
+
+    void downBalance(int index) {
+        // LEFT_CHILD_INDEX(index) >= nodes_.size() 即当前平衡的节点为最后一个节点
+        if (index < 0 || LEFT_CHILD_INDEX(index) >= nodes_.size()) {
+            return;
+        }
+
+        int nextIndex = nodes_.size();
+        int leftIndex = LEFT_CHILD_INDEX(index);
+        int rightIndex = RIGHT_CHILD_INDEX(index);
+        if (rightIndex > nodes_.size() - 1) {
+            if (nodes_[index].key > nodes_[leftIndex].key) {
+                std::swap(nodes_[index], nodes_[leftIndex]);
+                nextIndex = leftIndex;
+            }
+        } else {
+            if (nodes_[leftIndex].key <= nodes_[rightIndex].key) {
+                if (nodes_[index].key > nodes_[leftIndex].key) {
+                    std::swap(nodes_[index], nodes_[leftIndex]);
+                    nextIndex = leftIndex;
+                }
+            } else {
+                if (nodes_[index].key > nodes_[rightIndex].key) {
+                    std::swap(nodes_[index], nodes_[rightIndex]);
+                    nextIndex = rightIndex;
+                }
+            }
+        }
+
+        downBalance(nextIndex);
+    }
 private:
-    std::vector<SmallHeapNode> nodes_;   
+    std::vector<SmallHeapNode<K, V>> nodes_;   
 };
 
 #endif // NETSERVER_REACTOR_DATASTRUCT_SMALLHEAP_H
