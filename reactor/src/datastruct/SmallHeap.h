@@ -40,7 +40,47 @@ public:
 
     void addNode(const K &key, const V &value) {
         nodes_.push_back(std::move(SmallHeapNode<K, V>(key, value)));
-        upBalance(nodes_.size() - 1);
+    }
+
+    void addNodeAndBalance(const K &key, const V &value) {
+        addNode(key, value);
+        upBalance(nodes_.size() - 1);   
+    }
+
+    bool heapSort() {
+        if (nodes_.empty()) {
+            return false;
+        }
+
+        auto sort = [this] (int start, int end) {
+            int son = LEFT_CHILD_INDEX(start);
+            while (son < end) {                
+                if (son + 1 < end && nodes_[son].key < nodes_[son + 1].key) {
+                    son += 1;
+                }
+
+                if (nodes_[start].key > nodes_[son].key) {
+                    break;
+                } else {
+                    std::swap(nodes_[start], nodes_[son]);
+                    start = son;
+                    son = LEFT_CHILD_INDEX(start);
+                }
+            }
+        };
+
+        int size = nodes_.size();
+        for (int j = PARENT_INDEX(size - 1); j >= 0; --j) {
+            sort(j, size);
+        }
+            
+
+        for (int i = nodes_.size() - 1; i > 0; --i) {
+            std::swap(nodes_[0], nodes_[i]);
+            sort(0, i);
+        }
+
+        return true;
     }
 
     void removeNode(const K &key) {
@@ -69,7 +109,7 @@ public:
     }
     void traverse() {
         for (auto ite = nodes_.begin(); ite != nodes_.end(); ++ite) {
-            std::cout << ite->value << std::endl;
+            std::cout << "key: " << ite->key << "  " << "value: " <<ite->value << std::endl;
         }
     }
 private:
