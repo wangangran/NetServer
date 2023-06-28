@@ -77,6 +77,8 @@
         "cinttypes": "cpp",
         "typeindex": "cpp",
         "typeinfo": "cpp",
-        "optional": "cpp"
+        "optional": "cpp",
+        "any": "cpp",
+        "variant": "cpp"
     }
 }

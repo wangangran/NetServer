@@ -1,5 +1,5 @@
 # gcc -fPIC -shared -o libhookMalloc.so HookMalloc.c -ldl
-# 运行时LD_PRELOAD=./libhookMalloc.so ./xxx
+# 运行时LD_PRELOAD=./libmemoryhook ./xxx
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 
 set(SRC_LIST

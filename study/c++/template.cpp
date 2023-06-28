@@ -127,6 +127,7 @@ struct People {
 
 int main()
 {
+	#if 0
 	//setFunc(add);
 	People p1("xiaoming", 17, 1);
 	People p2("xiaohao", 18, 2);
@@ -137,6 +138,10 @@ int main()
 	//p[p2] = 1;
 	//p[p3] = 2;
 	p.insert(std::pair<People, int>(p1, 0));
+	#endif
+
+	std::string cmd = "tar --use-compress-program=\"pigz -p2\" -xvpf ";
+	std::cout << cmd << std::endl;
 }
 
 // int main()
