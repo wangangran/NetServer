@@ -20,21 +20,25 @@ int main(int argc, char *argv[])
     heap.addNode(48, "ai");
     heap.addNode(26, "chen");
     heap.addNode(1, "peng");
-    std::cout << heap.tackFirst().value << std::endl;
-    std::cout << heap.tackFirst().value << std::endl;
-    std::cout << heap.tackFirst().value << std::endl;
-    std::cout << heap.tackFirst().value << std::endl;
-    std::cout << heap.tackFirst().value << std::endl;
-    std::cout << heap.tackFirst().value << std::endl;
-    std::cout << heap.tackFirst().value << std::endl;
-    std::cout << heap.tackFirst().value << std::endl;
-    std::cout << heap.tackFirst().value << std::endl;
-    std::cout << heap.tackFirst().value << std::endl;
-    std::cout << heap.tackFirst().value << std::endl;
-    std::cout << heap.tackFirst().value << std::endl;
-    std::cout << heap.tackFirst().value << std::endl;
-    std::cout << heap.tackFirst().value << std::endl;    
-    std::cout << heap.tackFirst().value << std::endl;
+
+    heap.heapSort();
+    heap.traverse();
+
+    // std::cout << heap.tackFirst().value << std::endl;
+    // std::cout << heap.tackFirst().value << std::endl;
+    // std::cout << heap.tackFirst().value << std::endl;
+    // std::cout << heap.tackFirst().value << std::endl;
+    // std::cout << heap.tackFirst().value << std::endl;
+    // std::cout << heap.tackFirst().value << std::endl;
+    // std::cout << heap.tackFirst().value << std::endl;
+    // std::cout << heap.tackFirst().value << std::endl;
+    // std::cout << heap.tackFirst().value << std::endl;
+    // std::cout << heap.tackFirst().value << std::endl;
+    // std::cout << heap.tackFirst().value << std::endl;
+    // std::cout << heap.tackFirst().value << std::endl;
+    // std::cout << heap.tackFirst().value << std::endl;
+    // std::cout << heap.tackFirst().value << std::endl;    
+    // std::cout << heap.tackFirst().value << std::endl;
 
     return 0;
 }
