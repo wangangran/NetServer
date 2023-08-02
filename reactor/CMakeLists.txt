@@ -3,10 +3,11 @@ cmake_minimum_required (VERSION 2.8)
 project (sunwar)
 
 set(CXX_FLAGS
- -g
- -Wall
- -std=c++11
- -pthread
+    -g
+    -Wall
+    -std=c++20
+    -pthread
+    -fcoroutines
 )
 
 string(REPLACE ";" " " CMAKE_CXX_FLAGS "${CXX_FLAGS}")
@@ -34,3 +35,4 @@ add_subdirectory("${PROJECT_SOURCE_DIR}/src/dataStruct")
 #example
 add_subdirectory("${PROJECT_SOURCE_DIR}/example/echo")
 add_subdirectory("${PROJECT_SOURCE_DIR}/example/log")
+add_subdirectory("${PROJECT_SOURCE_DIR}/example/coroutines")
