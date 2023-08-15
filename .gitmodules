@@ -1,3 +1,0 @@
-[submodule "reactor/thirdLib"]
-	path = reactor/thirdLib
-	url = https://github.com/yyzybb537/libgo.git
