@@ -39,6 +39,9 @@ void print(const T &t, const Args&... args) {
     print(args...);
 }
 
+
+bool compareList()
+
 int main(int argc, char *argv[]) {
     TypeA objA{.a = 1, .b = 2.0, .c = 'a', .str = "hello war"};
     int num = MemberCountImpl<TypeA>();
@@ -48,7 +51,6 @@ int main(int argc, char *argv[]) {
     float b = 1.0;
     double c = 2.0;
     std::string d = "hello";
-
 
     TypeA objB = TypeA{{1}, {2.0}, {'a'}, {"hello"}};
     std::cout << fun1<TypeA>() << objB.str << std::endl;

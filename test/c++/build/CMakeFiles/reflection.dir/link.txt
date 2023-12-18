@@ -1,0 +1,1 @@
+/usr/bin/c++ -g -Wall -std=c++20 -pthread -rdynamic CMakeFiles/reflection.dir/main.cpp.o -o reflection 

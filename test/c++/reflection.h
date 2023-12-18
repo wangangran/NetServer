@@ -45,4 +45,4 @@ constexpr decltype(auto) VisitMembers(auto &&object) {
     return Count;
 }
 
-#endif //SUNWAR_REFLECTION_H
+#endif // SUNWAR_REFLECTION_H
